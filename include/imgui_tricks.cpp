@@ -123,14 +123,14 @@ namespace ImTricks {
 
 	namespace Widgets {
 		void ColorEdit3(const char* label, ImColor& color, ImGuiColorEditFlags flags) {
-			static float col[3] = { color.Value.x, color.Value.y, color.Value.z };
+			float col[3] = { color.Value.x, color.Value.y, color.Value.z };
 
 			if (ImGui::ColorEdit3(label, col, flags))
 				color = ImColor(col[0], col[1], col[2]);
 		}
 
 		void ColorEdit4(const char* label, ImColor& color, ImGuiColorEditFlags flags) {
-			static float col[4] = { color.Value.x, color.Value.y, color.Value.z , color.Value.w };
+			float col[4] = { color.Value.x, color.Value.y, color.Value.z , color.Value.w };
 
 			if (ImGui::ColorEdit4(label, col, flags))
 				color = ImColor(col[0], col[1], col[2], col[3]);
