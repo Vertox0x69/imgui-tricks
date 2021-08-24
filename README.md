@@ -6,6 +6,7 @@ At the moment it has in itself:
 * Functions to speed up the creation of animations.
 * Functions for creating and displaying notifications.
 * Widgets that are missing in the standard ImGui.
+* A customized ImColor structure with an additional constructor from the HEX HTML color code and a method for obtaining HEX HTML from an already existing color.
 
 # Notifies Usage
 
@@ -50,6 +51,19 @@ void RenderMyGUI() {
    ...
    static ImColor col = ImColor(23, 23, 23);
    ImTricks::Widgets::ColorEdit4("test", col, NULL);
+   ...
+}
+
+```
+
+# ImTrickyColor
+
+```cpp
+
+void RenderMyGUI() {
+   ...
+  	ImTrickyColor color = ImTrickyColor("#eb4034ff");
+   ImGui::Text(color.HTML().c_str());
    ...
 }
 
