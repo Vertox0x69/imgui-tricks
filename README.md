@@ -51,6 +51,8 @@ void RenderMyGUI() {
    ...
    static ImColor col = ImColor(23, 23, 23);
    ImTricks::Widgets::ColorEdit4("test", col, NULL);
+   static ImTrickyColor col2 = ImColor(23, 23, 23);
+   ImTricks::Widgets::ColorEdit4("test2", col2, NULL);
    ...
 }
 
