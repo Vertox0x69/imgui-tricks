@@ -4,13 +4,13 @@ namespace ImTricks {
 
 	namespace Animations {
 
-		int FastLerpInt(const char* identifier, bool state, int min, int max, int speed) {
+		int FastIntLerp(const char* identifier, bool state, int min, int max, int speed) {
 
-			static std::map<const char*, int> valuesMapInt;
+			static std::unordered_map<const char*, int> valuesMapInt;
 			auto value = valuesMapInt.find(identifier);
 
 			if (value == valuesMapInt.end()) {
-				valuesMapInt.insert({ identifier,  0 });
+				valuesMapInt.insert({ identifier,  min });
 				value = valuesMapInt.find(identifier);
 			}
 
@@ -30,13 +30,13 @@ namespace ImTricks {
 			return value->second;
 		}
 
-		float FastLerpFloat(const char* identifier, bool state, float min, float max, float speed) {
+		float FastFloatLerp(const char* identifier, bool state, float min, float max, float speed) {
 
-			static std::map<const char*, float> valuesMapFloat;
+			static std::unordered_map<const char*, float> valuesMapFloat;
 			auto value = valuesMapFloat.find(identifier);
 
 			if (value == valuesMapFloat.end()) {
-				valuesMapFloat.insert({ identifier, 0.f });
+				valuesMapFloat.insert({ identifier, min });
 				value = valuesMapFloat.find(identifier);
 			}
 
@@ -52,6 +52,39 @@ namespace ImTricks {
 			}
 
 			value->second = std::clamp(value->second, min, max);
+
+			return value->second;
+		}
+
+		ImVec2 FastImVec2Lerp(const char* identifier, bool state, ImVec2 min, ImVec2 max, float speed) {
+
+			static std::unordered_map<const char*, ImVec2> valuesMapFloat;
+			auto value = valuesMapFloat.find(identifier);
+
+			if (value == valuesMapFloat.end()) {
+				valuesMapFloat.insert({ identifier, min });
+				value = valuesMapFloat.find(identifier);
+			}
+
+			const float frameRateSpeed = speed * (1.f - ImGui::GetIO().DeltaTime);
+
+			if (state) {
+				if (value->second.x < max.x)
+					value->second.x += frameRateSpeed;
+
+				if (value->second.y < max.y)
+					value->second.y += frameRateSpeed;
+			}
+			else {
+				if (value->second.x > min.x)
+					value->second.x -= frameRateSpeed;
+
+				if (value->second.y > min.y)
+					value->second.y -= frameRateSpeed;
+			}
+
+			value->second.x = std::clamp(value->second.x, min.x, max.x);
+			value->second.y = std::clamp(value->second.y, min.y, max.y);
 
 			return value->second;
 		}
