@@ -154,11 +154,15 @@ namespace ImTricks {
 				NotifyPos.y -= 40.f;
 			};
 
-			for (auto notify : notifies) {
-				if (notify.time < GetTickCount64())
+			for (int i = 0; i < notifies.size(); i++)
+			{
+				auto current_notify = notifies.at(i);
+				if (current_notify.time < GetTickCount64())
+				{
+					notifies.erase(notifies.begin() + i);
 					continue;
-
-				DrawNotify(notify);
+				}
+				DrawNotify(current_notify);            
 			}
 		}
 	}
