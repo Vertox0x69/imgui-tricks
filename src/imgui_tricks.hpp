@@ -8,8 +8,11 @@
 */
 
 #include <windows.h>
+#include <ios>
+#include <iostream>
 #include <unordered_map>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <algorithm>
 
@@ -19,6 +22,65 @@
 
 #ifndef IMGUI_TRICK_ONCE
 #define IMGUI_TRICK_ONCE
+
+
+/*
+// A customized ImColor structure with an additional constructor from the HEX HTML color code
+// and a method for obtaining HEX HTML from an already existing color.
+*/
+struct ImTrickyColor
+{
+	float values[4];
+
+	ImTrickyColor() { values[0] = 0.f; values[1] = 0.f; values[2] = 0.f; values[3] = 0.f; };
+
+	ImTrickyColor(float r, float g, float b, float a = 1.f) { values[0] = r; values[1] = g; values[2] = b; values[3] = a; };
+	ImTrickyColor(int r, int g, int b, int a = 255) { values[0] = r / 255.f; values[1] = g / 255.f; values[2] = b / 255.f; values[3] = a / 255.f; };
+	ImTrickyColor(std::string html) {
+		auto SplitByCharacters = [](const std::string& str, int splitLength) {
+
+			int NumSubstrings = str.length() / splitLength;
+			std::vector<std::string> ret;
+
+			for (int i = 0; i < NumSubstrings; i++) {
+				ret.push_back(str.substr(i * splitLength, splitLength));
+			}
+			if (str.length() % splitLength != 0) {
+				ret.push_back(str.substr(splitLength * NumSubstrings));
+			}
+
+			return ret;
+		};
+
+		if (html.at(0) == '#') {
+			html.erase(0, 1);
+		}
+
+		while (html.length() != 8) {
+			html.append("0");
+		}
+
+		std::vector<std::string> colori = SplitByCharacters(html, 2);
+
+		values[0] = stoi(colori[0], nullptr, 16) / 255.f;
+		values[1] = stoi(colori[1], nullptr, 16) / 255.f;
+		values[2] = stoi(colori[2], nullptr, 16) / 255.f;
+		values[3] = stoi(colori[3], nullptr, 16) / 255.f;
+	};
+	ImTrickyColor(ImColor col) { values[0] = col.Value.x; values[1] = col.Value.y; values[2] = col.Value.z; values[3] = col.Value.w; };
+
+	inline operator ImU32() const { return ImGui::ColorConvertFloat4ToU32(ImVec4(values[0], values[1], values[2], values[3])); }
+	inline operator ImVec4() const { return ImVec4(values[0], values[1], values[2], values[3]); }
+	inline float operator[](std::size_t idx) const { return values[idx]; }
+
+	inline void SetHSV(float h, float s, float v, float a = 1.0f) { ImGui::ColorConvertHSVtoRGB(h, s, v, values[0], values[1], values[2]); values[3] = a; }
+	inline ImTrickyColor HSV(float h, float s, float v, float a = 1.0f) { float r, g, b; ImGui::ColorConvertHSVtoRGB(h, s, v, r, g, b); return ImTrickyColor(r, g, b, a); }
+
+	inline std::string HTML() {
+		int integers[4] = { values[0] * 255,values[1] * 255, values[2] * 255,values[3] * 255 };
+		return "#" + (std::stringstream{} << std::hex << (integers[0] << 24 | integers[1] << 16 | integers[2] << 8 | integers[3])).str();
+	};
+};
 
 enum NotifyState : int {
 	ImTrickNotify_Success = 0,
