@@ -71,6 +71,7 @@ struct ImTrickyColor
 
 	inline operator ImU32() const { return ImGui::ColorConvertFloat4ToU32(ImVec4(values[0], values[1], values[2], values[3])); }
 	inline operator ImVec4() const { return ImVec4(values[0], values[1], values[2], values[3]); }
+	inline operator ImColor() const { return ImColor(values[0], values[1], values[2], values[3]); }
 	inline float operator[](std::size_t idx) const { return values[idx]; }
 
 	inline void SetHSV(float h, float s, float v, float a = 1.0f) { ImGui::ColorConvertHSVtoRGB(h, s, v, values[0], values[1], values[2]); values[3] = a; }
