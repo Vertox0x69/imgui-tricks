@@ -168,7 +168,8 @@ namespace ImTricks {
 		// I don't understand why ocornut didn't add ImColor support to ColorEdit.
 		extern void ColorEdit3(const char* label, ImColor& color, ImGuiColorEditFlags flags = NULL);
 		extern void ColorEdit4(const char* label, ImColor& color, ImGuiColorEditFlags flags = NULL);
-
+		extern void ColorEdit3(const char* label, ImTrickyColor& color, ImGuiColorEditFlags flags = NULL);
+		extern void ColorEdit4(const char* label, ImTrickyColor& color, ImGuiColorEditFlags flags = NULL);
 	}
 }
 

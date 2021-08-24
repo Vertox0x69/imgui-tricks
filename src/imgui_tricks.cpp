@@ -168,6 +168,20 @@ namespace ImTricks {
 			if (ImGui::ColorEdit4(label, col, flags))
 				color = ImColor(col[0], col[1], col[2], col[3]);
 		}
+
+		void ColorEdit3(const char* label, ImTrickyColor& color, ImGuiColorEditFlags flags) {
+			float col[3] = { color[0], color[1], color[2] };
+
+			if (ImGui::ColorEdit3(label, col, flags))
+				color = ImTrickyColor(col[0], col[1], col[2]);
+		}
+
+		void ColorEdit4(const char* label, ImTrickyColor& color, ImGuiColorEditFlags flags) {
+			float col[4] = { color[0], color[1], color[2] , color[3] };
+
+			if (ImGui::ColorEdit4(label, col, flags))
+				color = ImTrickyColor(col[0], col[1], col[2], col[3]);
+		}
 	}
 
 }
