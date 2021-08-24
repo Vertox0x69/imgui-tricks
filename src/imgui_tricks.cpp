@@ -99,6 +99,15 @@ namespace ImTricks {
 			return ImGui::ColorConvertFloat4ToU32(lerp);
 		}
 
+		ImTrickyColor FastColorLerp(ImTrickyColor start, ImTrickyColor end, float stage)
+		{
+			ImVec4 lerp = ImLerp(
+				ImVec4(start[0], start[1], start[2], start[3]),
+				ImVec4(end[0], end[1], end[2], end[3]),
+				stage);
+
+			return ImTrickyColor(lerp.x, lerp.y, lerp.z, lerp.w);
+		}
 	}
 
 	namespace NotifyManager {

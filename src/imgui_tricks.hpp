@@ -127,6 +127,7 @@ namespace ImTricks {
 		//	draw->AddRectFilled(p, p + ImVec2(513, 30), ImTricks::Animations::FastColorLerp(ImColor(255, 0, 0), ImColor(0, 255, 0), trickFloat));
 		*/
 		extern ImColor FastColorLerp(ImColor start, ImColor end, float stage);
+		extern ImTrickyColor FastColorLerp(ImTrickyColor start, ImTrickyColor end, float stage);
 	}
 
 	/*
