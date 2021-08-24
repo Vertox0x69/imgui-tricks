@@ -62,7 +62,7 @@ void RenderMyGUI() {
 
 void RenderMyGUI() {
    ...
-  	ImTrickyColor color = ImTrickyColor("#eb4034ff");
+   ImTrickyColor color = ImTrickyColor("#eb4034ff");
    ImGui::Text(color.HTML().c_str());
    ...
 }
