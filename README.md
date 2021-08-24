@@ -31,13 +31,16 @@ void RenderMyGUI() {
 void RenderMyGUI() {
    ...
    ImGui::Checkbox("Enable Animation", &enable_animation);
-   float trickFloat = ImTricks::Animations::FastLerpInt("trickFloat", enable_animation, 0.f, 1.f, 0.05f);
-   ImColor colorLerped = ImTricks::Animations::FastColorLerp(ImColor(255, 0, 0), ImColor(0, 255, 0), trickFloat);
-   ImGui::GetWindowDrawList()->AddRectFilled(p, p + ImVec2(500, 30), colorLerped);
+	float trickFloat = ImTricks::Animations::FastFloatLerp("header", enable_animation, 0.f, 1.f, 0.05f);
+	ImVec2 pos1 = ImTricks::Animations::FastImVec2Lerp("pos1", enable_animation, ImVec2(0, 50), ImVec2(100, 50), 5);
+	ImVec2 pos2 = ImTricks::Animations::FastImVec2Lerp("pos2", enable_animation, ImVec2(413, 80), ImVec2(513, 80), 5);
+	draw->AddRectFilled(p + pos1, p + pos2, ImTricks::Animations::FastColorLerp(ImColor(255, 0, 0), ImColor(0, 255, 0), trickFloat));
    ...
 }
 
 ```
+
+https://user-images.githubusercontent.com/61081677/130608582-0688ebde-a108-4bc6-b5ed-32dbe9dc05f3.mp4
 
 # Widgets Usage
 
