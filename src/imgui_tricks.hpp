@@ -146,6 +146,7 @@ namespace ImTricks {
 		// Description:
 		// Responsible for adding notifications to the display queue.
 		//
+		// Usage:
 		//	if (ImGui::Button("Create Notify", { 120, 25 }))
 		//		ImTricks::NotifyManager::AddNotify("The notification was displayed successfully.", ImTrickNotify_Success);
 		*/
@@ -156,7 +157,7 @@ namespace ImTricks {
 		// Call a function in your render. This function is responsible for displaying and monitoring notifications.
 		//
 		// Usage:
-		// ImTricks::NotifyManager::HandleNotifies(ImGui::GetOverlayDrawList());
+		//  ImTricks::NotifyManager::HandleNotifies(ImGui::GetOverlayDrawList());
 		*/
 		extern void HandleNotifies(ImDrawList* draw = ImGui::GetOverlayDrawList());
 
@@ -170,6 +171,27 @@ namespace ImTricks {
 		extern void ColorEdit4(const char* label, ImColor& color, ImGuiColorEditFlags flags = NULL);
 		extern void ColorEdit3(const char* label, ImTrickyColor& color, ImGuiColorEditFlags flags = NULL);
 		extern void ColorEdit4(const char* label, ImTrickyColor& color, ImGuiColorEditFlags flags = NULL);
+
+	}
+
+	namespace DrawList {
+
+		/*
+		// The original author of the code is nathanvoglsam
+		// https://github.com/nathanvoglsam
+		//
+		// Usage:
+		//  ImTricks::DrawList::AddTriangleFilledMultiColor(draw, p + ImVec2(0, 0), p + ImVec2(150, 150), p + ImVec2(300, 0), ImTrickyColor("#32a877ff"), ImTrickyColor("#3246a8ff"), ImTrickyColor("#a83232ff"));
+		*/
+		extern void AddTriangleFilledMultiColor(ImDrawList* draw, const ImVec2& a, const ImVec2& b, const ImVec2& c, ImTrickyColor col_a, ImTrickyColor col_b, ImTrickyColor col_c);
+
+		/*
+		// Usage:
+		//	ImVec2 points[] = { p + ImVec2(0, 75),p + ImVec2(75, 0), p + ImVec2(150, 25), p + ImVec2(150, 150), p + ImVec2(75, 200), p + ImVec2(0, 150) };
+		//	ImTrickyColor colors[] = { ImTrickyColor("#00ffffff"), ImTrickyColor("#00ffffff"),ImTrickyColor("#00ffffff"), ImTrickyColor("#e600ffff"),ImTrickyColor("#e600ffff"), ImTrickyColor("#e600ffff") };
+		//	ImTricks::DrawList::AddConvexPolyFilledMultiColor(draw, points, colors, 6);
+		*/
+		extern void AddConvexPolyFilledMultiColor(ImDrawList* draw, const ImVec2* verts, ImTrickyColor* colors, int points);
 	}
 }
 
